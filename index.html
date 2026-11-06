@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DISHWASH — Premium Kitchen Washing Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="HoloCard.css">
+<style>
+:root {
+  --bg: #F4F7F9;
+  --panel: #FFFFFF;
+  --surface: #F8FAFC;
+  --ink: #0F172A;
+  --ink-secondary: #334155;
+  --mute: #64748B;
+  --line: #E2E8F0;
+  --line-light: #F1F5F9;
+  --accent: #0EA5E9;
+  --accent-hover: #0284C7;
+  --accent-glow: rgba(14, 165, 233, 0.25);
+  --accent-ink: #FFFFFF;
+  --stage: #EAF0F6;
+  --ring: #CBD5E1;
+  --dish: #FFFFFF;
+  --dish2: #D8E2E8;
+  --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #090D12;
+    --panel: #131A22;
+    --surface: #0E141B;
+    --ink: #F1F5F9;
+    --ink-secondary: #CBD5E1;
+    --mute: #94A3B8;
+    --line: #1E293B;
+    --line-light: #15202E;
+    --accent: #38BDF8;
+    --accent-hover: #0EA5E9;
+    --accent-glow: rgba(56, 189, 248, 0.3);
+    --accent-ink: #041017;
+    --stage: #0F161E;
+    --ring: #263445;
+    --dish: #EEF3F5;
+    --dish2: #A7B8C2;
+    --card-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #090D12;
+  --panel: #131A22;
+  --surface: #0E141B;
+  --ink: #F1F5F9;
+  --ink-secondary: #CBD5E1;
+  --mute: #94A3B8;
+  --line: #1E293B;
+  --line-light: #15202E;
+  --accent: #38BDF8;
+  --accent-hover: #0EA5E9;
+  --accent-glow: rgba(56, 189, 248, 0.3);
+  --accent-ink: #041017;
+  --stage: #0F161E;
+  --ring: #263445;
+  --dish: #EEF3F5;
+  --dish2: #A7B8C2;
+  --card-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── Typography & Headings ── */
+h1, h2, h3, .brand-logo {
+  font-family: "Space Grotesk", "Plus Jakarta Sans", sans-serif;
+  letter-spacing: -0.03em;
+}
+
+/* ── Loading Screen ── */
+#loadScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 20px;
+}
+#loadScreen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+.load-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-glow);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+.load-title {
+  font-size: clamp(38px, 9vw, 68px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  line-height: 1;
+}
+.load-title span {
+  color: var(--accent);
+}
+.load-bar-wrap {
+  width: min(340px, 80vw);
+  height: 8px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+.load-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), #38BDF8);
+  border-radius: 999px;
+  transition: width 1.95s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.load-hint {
+  font-size: 14px;
+  color: var(--mute);
+  font-weight: 500;
+}
+
+/* ── Intro Video Screen ── */
+#introScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+  overflow: hidden;
+}
+#introScreen.show {
+  display: flex;
+}
+#introScreen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+#introScreen video {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+@media (max-aspect-ratio: 1/1) {
+  #introScreen video {
+    object-fit: cover;
+  }
+}
+.intro-skip-btn {
+  position: absolute;
+  top: max(20px, env(safe-area-inset-top, 20px));
+  right: max(20px, env(safe-area-inset-right, 20px));
+  z-index: 10;
+  padding: 9px 18px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.intro-skip-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ── Marquee Ticker ── */
+.marquee-container {
+  width: 100%;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marqueeScroll 28s linear infinite;
+  gap: 36px;
+  padding: 10px 0;
+}
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.marquee-item span.highlight {
+  color: var(--accent);
+  font-weight: 700;
+}
+.marquee-item .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.8;
+}
+
+/* ── Main Layout ── */
+.wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+/* ── Top Header Bar ── */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), #0284C7);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+.brand-name {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.brand-name span {
+  color: var(--accent);
+}
+.brand-tag {
+  font-size: 11px;
+  color: var(--mute);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+}
+.stat span {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mute);
+}
+.stat b {
+  font-size: 19px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.music-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.music-toggle:hover {
+  transform: scale(1.06);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--panel);
+}
+.music-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Game Grid ── */
+main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── Sink Stage ── */
+.stage {
+  position: relative;
+  background: var(--stage);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: border-color 0.2s ease;
+}
+.stage:hover {
+  border-color: rgba(14, 165, 233, 0.4);
+}
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 68vh;
+  touch-action: none;
+  cursor: none;
+  user-select: none;
+}
+
+/* ── Control Panel ── */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.panel section {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line-light);
+}
+.panel section:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.dish-meta-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.dish-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-glow);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+}
+p.hint {
+  margin: 6px 0 0;
+  color: var(--mute);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Segmented Buttons */
+.seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+.seg button {
+  border: 0;
+  background: transparent;
+  color: var(--mute);
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.15s ease;
+}
+.seg button[aria-pressed="true"] {
+  background: var(--panel);
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 14.5px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.btn.primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  border-color: transparent;
+  color: var(--accent-ink);
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn.primary:hover:not(:disabled) {
+  box-shadow: 0 6px 20px var(--accent-glow);
+  color: #fff;
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Meters */
+.meter {
+  margin-bottom: 14px;
+}
+.meter:last-child {
+  margin-bottom: 0;
+}
+.meter div.l {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mute);
+}
+.meter div.l span:last-child {
+  color: var(--ink);
+}
+.meter i {
+  display: block;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line-light);
+  margin-top: 6px;
+  overflow: hidden;
+}
+.meter i b {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), #38BDF8);
+  border-radius: 999px;
+  transition: width 0.15s ease-out;
+}
+
+/* Rack */
+.rack {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-height: 32px;
+  align-items: center;
+}
+.rack span {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.rack span.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.1);
+  box-shadow: 0 2px 10px var(--accent-glow);
+}
+
+/* Finish Overlay Card */
+.over {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--stage) 88%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 20px;
+  z-index: 50;
+}
+.over.show {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+.card h2 {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+.card p {
+  color: var(--mute);
+  font-size: 14.5px;
+  margin: 0 0 20px;
+}
+.card dl {
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px 16px;
+  font-size: 15px;
+  background: var(--surface);
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+}
+.card dt {
+  color: var(--mute);
+  text-align: left;
+}
+.card dd {
+  margin: 0;
+  font-weight: 700;
+  text-align: right;
+  color: var(--ink);
+}
+
+/* ── Scroll Reveal Section: Team DISHWASH ── */
+.team-section {
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 1px solid var(--line);
+}
+.section-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 36px;
+}
+.section-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-glow);
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.section-title span {
+  color: var(--accent);
+}
+.section-desc {
+  color: var(--mute);
+  font-size: 15px;
+  margin: 0;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.team-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #38BDF8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.team-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 30px -10px var(--accent-glow);
+}
+.team-card:hover::before {
+  opacity: 1;
+}
+.member-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--surface), var(--stage));
+  border: 2px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 16px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+.team-card:hover .member-avatar {
+  transform: scale(1.08);
+}
+.member-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+.member-handle {
+  font-size: 13px;
+  color: var(--mute);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.insta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+.team-card:hover .insta-pill {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.insta-pill svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* Footer */
+footer {
+  margin-top: 48px;
+  padding: 24px 20px;
+  text-align: center;
+  color: var(--mute);
+  font-size: 13px;
+  border-top: 1px solid var(--line-light);
+}
+
+/* ── Scroll Reveal Animation ── */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Confetti Canvas ── */
+#celebCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  pointer-events: none;
+  display: none;
+}
+
+/* ── Mobile Responsive Optimizations ── */
+@media (max-width: 860px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+  .wrap {
+    padding: 16px 14px 40px;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+  }
+  .stats-bar {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .stage {
+    border-radius: var(--radius-md);
+  }
+  svg {
+    max-height: 52vh;
+  }
+  .panel {
+    padding: 20px;
+    border-radius: var(--radius-md);
+  }
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .team-card {
+    padding: 18px 14px;
+  }
+  .member-avatar {
+    width: 58px;
+    height: 58px;
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .member-name {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-bar {
+    gap: 12px;
+  }
+  .stat b {
+    font-size: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meter i b, .marquee-track, .reveal-on-scroll {
+    transition: none !important;
+    animation: none !important;
+  }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOADING SCREEN ══ -->
+<div id="loadScreen">
+  <div class="load-badge">DISHWASH LABS</div>
+  <div class="load-title">DISH<span>WASH</span></div>
+  <div class="load-bar-wrap"><div class="load-bar-fill" id="loadBar"></div></div>
+  <div class="load-hint">Initializing clean kitchen environment…</div>
+</div>
+
+<!-- ══ INTRO VIDEO OVERLAY (Mobile & Desktop Optimized) ══ -->
+<div id="introScreen">
+  <video id="introVid" playsinline webkit-playsinline preload="auto">
+    <source src="introvideo.mp4" type="video/mp4">
+  </video>
+  <button type="button" class="intro-skip-btn" id="introSkip">
+    Skip Intro
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+  </button>
+</div>
+
+<!-- ══ SCROLLING MARQUEE TICKER ══ -->
+<div class="marquee-container" aria-label="Team announcements">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="dot"></span> CREATED BY <span class="highlight">TEAM DISHWASH</span></div>
+    <div class="marquee-item"><span class="dot"></span> KARTHIK • <span class="highlight">@karthiiii.dev</span></div>
+    <div class="marquee-item"><span class="dot"></span> SREYA • <span class="highlight">@sreya.eev</span></div>
+    <div class="marquee-item"><span class="dot"></span> YASEEN • <span class="highlight">@yaziiiiee</span></div>
+    <div class="marquee-item"><span class="dot"></span> UMA • <span class="highlight">@umaa.biii</span></div>
+    <div class="marquee-item"><span class="dot"></span> 100% CLEAN STAIN CHALLENGE</div>
+    <div class="marquee-item"><span class="dot"></span> HOLOGRAPHIC REWARDS ON COMPLETION</div>
+    <!-- Duplicate for infinite seamless scroll -->
+    <div class="marquee-item"><span class="dot"></span> CREATED BY <span class="highlight">TEAM DISHWASH</span></div>
+    <div class="marquee-item"><span class="dot"></span> KARTHIK • <span class="highlight">@karthiiii.dev</span></div>
+    <div class="marquee-item"><span class="dot"></span> SREYA • <span class="highlight">@sreya.eev</span></div>
+    <div class="marquee-item"><span class="dot"></span> YASEEN • <span class="highlight">@yaziiiiee</span></div>
+    <div class="marquee-item"><span class="dot"></span> UMA • <span class="highlight">@umaa.biii</span></div>
+    <div class="marquee-item"><span class="dot"></span> 100% CLEAN STAIN CHALLENGE</div>
+    <div class="marquee-item"><span class="dot"></span> HOLOGRAPHIC REWARDS ON COMPLETION</div>
+  </div>
+</div>
+
+<!-- ══ BACKGROUND AUDIO (LOUD & LOOPED) ══ -->
+<audio id="bgAudio" loop preload="auto">
+  <source src="bgaudio.mp4" type="video/mp4">
+  <source src="bgaudio.MP3" type="audio/mpeg">
+</audio>
+
+<!-- ══ CONFETTI CANVAS ══ -->
+<canvas id="celebCanvas"></canvas>
+
+<!-- ══ HOLO CARD POPUP ══ -->
+<div id="holoOverlay" role="dialog" aria-modal="true" aria-label="Dish complete">
+  <div class="holo-popup-inner">
+    <div class="holo-popup-label">
+      ✨ Spotless! <span id="holoSubtitle">Place it on the rack to continue</span>
+    </div>
+    <div id="holoCardMount"></div>
+    <button class="holo-popup-btn" id="holoDismiss">Place on Rack →</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <!-- ══ HEADER ══ -->
+  <header class="reveal-on-scroll">
+    <div class="brand">
+      <div class="brand-icon">🫧</div>
+      <div>
+        <h1 class="brand-name">DISH<span>WASH</span></h1>
+        <div class="brand-tag">BY TEAM DISHWASH</div>
+      </div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat"><span>Time</span><b id="sTime">0:00</b></div>
+      <div class="stat"><span>Water</span><b id="sWater">0.0 L</b></div>
+      <div class="stat"><span>Dish</span><b id="sDish">1 / 5</b></div>
+      <button type="button" class="music-toggle" id="musicToggle" aria-label="Toggle background audio" title="Toggle audio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="musicIcon"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ══ MAIN INTERACTIVE STAGE ══ -->
+  <main>
+    <div class="stage reveal-on-scroll">
+      <svg id="svg" viewBox="0 0 400 400" role="img" aria-label="Sink with a dirty dish. Press and drag to scrub or rinse.">
+        <circle cx="200" cy="200" r="190" fill="none" stroke="var(--ring)" stroke-width="2"/>
+        <circle cx="200" cy="200" r="178" fill="none" stroke="var(--ring)" stroke-width="1" stroke-dasharray="2 8"/>
+        <g id="dishG"></g><g id="grimeG"></g><g id="bubG"></g>
+        <g id="cur" style="display:none;pointer-events:none"></g>
+      </svg>
+      <div class="over" id="over"><div class="card">
+        <h2>Shift complete</h2><p id="rating"></p>
+        <dl><dt>Time</dt><dd id="rTime"></dd><dt>Water used</dt><dd id="rWater"></dd><dt>Score</dt><dd id="rScore"></dd></dl>
+        <button class="btn primary" id="again">Wash again</button>
+      </div></div>
+    </div>
+
+    <!-- ══ CONTROLS PANEL ══ -->
+    <aside class="panel reveal-on-scroll">
+      <section>
+        <div class="dish-meta-header">
+          <h2 id="dName">Dinner plate</h2>
+          <span class="dish-badge">Active</span>
+        </div>
+        <p class="hint" id="dHint">Add soap, then press and drag to scrub the stains away.</p>
+      </section>
+      <section>
+        <div class="seg" role="group" aria-label="Tool selection">
+          <button id="tScrub" aria-pressed="true">🧽 Scrub</button>
+          <button id="tRinse" aria-pressed="false">💧 Rinse</button>
+        </div>
+        <button class="btn" id="soapBtn">🧼 Add soap</button>
+      </section>
+      <section>
+        <div class="meter"><div class="l"><span>Stains left</span><span id="mGrime">100%</span></div><i><b id="bGrime"></b></i></div>
+        <div class="meter"><div class="l"><span>Suds left</span><span id="mSuds">0%</span></div><i><b id="bSuds"></b></i></div>
+        <div class="meter"><div class="l"><span>Soap on sponge</span><span id="mSoap">0%</span></div><i><b id="bSoap"></b></i></div>
+      </section>
+      <section>
+        <div class="rack" id="rack" aria-label="Drying rack"></div>
+        <button class="btn primary" id="rackBtn" disabled>Place on rack</button>
+      </section>
+    </aside>
+  </main>
+
+  <!-- ══ TEAM DISHWASH MEMBERS SECTION ══ -->
+  <section class="team-section reveal-on-scroll" id="team">
+    <div class="section-header">
+      <span class="section-badge">Credits</span>
+      <h2 class="section-title">Team <span>DISHWASH</span></h2>
+      <p class="section-desc">The creative developers and designers behind the DISHWASH interactive simulation.</p>
+    </div>
+    <div class="team-grid">
+      <!-- Member 1 -->
+      <a href="https://www.instagram.com/karthiiii.dev/" target="_blank" rel="noopener noreferrer" class="team-card reveal-on-scroll">
+        <div class="member-avatar">K</div>
+        <h3 class="member-name">Karthik</h3>
+        <span class="member-handle">Developer</span>
+        <div class="insta-pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @karthiiii.dev
+        </div>
+      </a>
+
+      <!-- Member 2 -->
+      <a href="https://www.instagram.com/sreya.eev/" target="_blank" rel="noopener noreferrer" class="team-card reveal-on-scroll">
+        <div class="member-avatar">S</div>
+        <h3 class="member-name">Sreya</h3>
+        <span class="member-handle">Designer</span>
+        <div class="insta-pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @sreya.eev
+        </div>
+      </a>
+
+      <!-- Member 3 -->
+      <a href="https://www.instagram.com/yaziiiiee/" target="_blank" rel="noopener noreferrer" class="team-card reveal-on-scroll">
+        <div class="member-avatar">Y</div>
+        <h3 class="member-name">Yaseen</h3>
+        <span class="member-handle">Creative Lead</span>
+        <div class="insta-pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @yaziiiiee
+        </div>
+      </a>
+
+      <!-- Member 4 -->
+      <a href="https://www.instagram.com/umaa.biii/" target="_blank" rel="noopener noreferrer" class="team-card reveal-on-scroll">
+        <div class="member-avatar">U</div>
+        <h3 class="member-name">Uma</h3>
+        <span class="member-handle">Developer</span>
+        <div class="insta-pill">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @umaa.biii
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 DISHWASH • Designed and built with ❤️ by Team DISHWASH</p>
+  </footer>
+</div>
+
+<script>
+const $ = s => document.querySelector(s), NS = 'http://www.w3.org/2000/svg';
+const el = (n, a, p) => {
+  const e = document.createElementNS(NS, n);
+  for (const k in a) e.setAttribute(k, a[k]);
+  if (p) p.appendChild(e);
+  return e;
+};
+
+const DISHES = [
+  { n: 'Dinner plate', t: 'plate', r: 150 },
+  { n: 'Cereal bowl', t: 'bowl', r: 135 },
+  { n: 'Coffee cup', t: 'cup', r: 105 },
+  { n: 'Frying pan', t: 'pan', r: 140 },
+  { n: 'Side plate', t: 'plate', r: 115 }
+];
+const COLORS = ['#8A5A2B', '#B5372E', '#C9A227', '#6B4A2A'];
+const S = { idx: 0, spots: [], bubs: [], soap: 0, tool: 'scrub', water: 0, t0: 0, down: false, done: false, running: false };
+const svg = $('#svg'), dishG = $('#dishG'), grimeG = $('#grimeG'), bubG = $('#bubG'), cur = $('#cur');
+
+function loadDish() {
+  const d = DISHES[S.idx];
+  dishG.innerHTML = grimeG.innerHTML = bubG.innerHTML = '';
+  S.spots = []; S.bubs = []; S.soap = 0;
+  
+  if (d.t === 'plate') {
+    el('circle', { cx: 200, cy: 200, r: d.r, fill: 'var(--dish)', stroke: 'var(--dish2)', 'stroke-width': 3 }, dishG);
+    el('circle', { cx: 200, cy: 200, r: d.r * 0.72, fill: 'none', stroke: 'var(--dish2)', 'stroke-width': 2 }, dishG);
+  }
+  if (d.t === 'bowl') {
+    el('circle', { cx: 200, cy: 200, r: d.r, fill: 'var(--dish2)' }, dishG);
+    el('circle', { cx: 200, cy: 200, r: d.r * 0.78, fill: 'var(--dish)' }, dishG);
+  }
+  if (d.t === 'cup') {
+    el('rect', { x: 290, y: 172, width: 78, height: 56, rx: 28, fill: 'none', stroke: 'var(--dish2)', 'stroke-width': 14 }, dishG);
+    el('circle', { cx: 200, cy: 200, r: d.r, fill: 'var(--dish)', stroke: 'var(--dish2)', 'stroke-width': 6 }, dishG);
+    el('circle', { cx: 200, cy: 200, r: d.r * 0.8, fill: 'var(--dish2)' }, dishG);
+  }
+  if (d.t === 'pan') {
+    el('rect', { x: 300, y: 186, width: 96, height: 28, rx: 14, fill: '#2A343C' }, dishG);
+    el('circle', { cx: 200, cy: 200, r: d.r, fill: '#3C4852' }, dishG);
+    el('circle', { cx: 200, cy: 200, r: d.r * 0.86, fill: '#2F3A43' }, dishG);
+  }
+  
+  const n = 26;
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * 6.283;
+    const dist = Math.sqrt(Math.random()) * (d.r - 26);
+    const s = 10 + Math.random() * 14;
+    const x = 200 + Math.cos(a) * dist;
+    const y = 200 + Math.sin(a) * dist;
+    const e = el('circle', { cx: x, cy: y, r: s, fill: COLORS[i % 4] }, grimeG);
+    S.spots.push({ e, x, y, s, h: 1 });
+  }
+  
+  $('#dName').textContent = d.n;
+  $('#dHint').textContent = 'Add soap, then press and drag to scrub the stains away.';
+  $('#sDish').textContent = (S.idx + 1) + ' / ' + DISHES.length;
+  S.done = false;
+  setTool('scrub');
+  ui();
+}
+
+function setTool(t) {
+  S.tool = t;
+  $('#tScrub').setAttribute('aria-pressed', t === 'scrub');
+  $('#tRinse').setAttribute('aria-pressed', t === 'rinse');
+  drawCur();
+}
+
+function drawCur() {
+  cur.innerHTML = '';
+  if (S.tool === 'scrub') {
+    el('rect', { x: -30, y: -20, width: 60, height: 40, rx: 10, fill: '#F0C648', stroke: '#B8932A', 'stroke-width': 2 }, cur);
+    for (let i = 0; i < 5; i++) el('circle', { cx: -20 + i * 10, cy: i % 2 ? 4 : -4, r: 2.5, fill: '#B8932A' }, cur);
+  } else {
+    el('circle', { r: 34, fill: '#0EA5E9', opacity: 0.2 }, cur);
+    el('path', { d: 'M0-16C10-4 12 4 0 14-12 4-10-4 0-16Z', fill: '#0EA5E9' }, cur);
+  }
+}
+
+function pt(e) {
+  const r = svg.getBoundingClientRect();
+  return {
+    x: ((e.clientX - r.left) / r.width) * 400,
+    y: ((e.clientY - r.top) / r.height) * 400
+  };
+}
+
+function act(x, y) {
+  if (S.done || !S.running) return;
+  const d = DISHES[S.idx];
+  const inside = Math.hypot(x - 200, y - 200) < d.r + 10;
+  
+  if (S.tool === 'scrub') {
+    S.spots.forEach(p => {
+      if (p.h > 0 && Math.hypot(p.x - x, p.y - y) < p.s + 30) {
+        p.h = Math.max(0, p.h - (S.soap > 0 ? 0.09 : 0.02));
+        p.e.setAttribute('opacity', p.h);
+        p.e.setAttribute('r', p.s * (0.4 + 0.6 * p.h));
+        if (!p.h) p.e.remove();
+      }
+    });
+    if (S.soap > 0 && inside) {
+      S.soap = Math.max(0, S.soap - 0.6);
+      if (S.bubs.length < 170) {
+        const e = el('circle', {
+          cx: x + (Math.random() - 0.5) * 50,
+          cy: y + (Math.random() - 0.5) * 50,
+          r: 8 + Math.random() * 12,
+          fill: '#fff',
+          opacity: 0.7,
+          stroke: '#0EA5E9',
+          'stroke-width': 1.5
+        }, bubG);
+        S.bubs.push(e);
+      }
+    }
+  } else {
+    S.water += 0.05;
+    S.bubs = S.bubs.filter(b => {
+      if (Math.hypot(b.getAttribute('cx') - x, b.getAttribute('cy') - y) < 48) {
+        b.remove();
+        return false;
+      }
+      return true;
+    });
+  }
+  ui();
+  check();
+}
+
+function remain() {
+  return S.spots.filter(p => p.h > 0).length;
+}
+
+function ui() {
+  const g = Math.round((remain() / S.spots.length) * 100);
+  const su = Math.round(Math.min(S.bubs.length, 100));
+  $('#mGrime').textContent = g + '%';
+  $('#bGrime').style.width = g + '%';
+  $('#mSuds').textContent = su + '%';
+  $('#bSuds').style.width = su + '%';
+  const so = Math.round(S.soap);
+  $('#mSoap').textContent = so + '%';
+  $('#bSoap').style.width = so + '%';
+  $('#sWater').textContent = S.water.toFixed(1) + ' L';
+}
+
+function check() {
+  if (!S.done && remain() === 0) {
+    S.done = true;
+    // Clear residual suds
+    S.bubs.forEach(b => b.remove());
+    S.bubs = [];
+    ui();
+    $('#rackBtn').disabled = false;
+    $('#dHint').textContent = 'Spotless!';
+    // Automatic HoloCard popup immediately on 0% stains left
+    const isLast = S.idx >= DISHES.length - 1;
+    setTimeout(() => showHoloPopup(isLast), 300);
+  }
+}
+
+svg.addEventListener('pointerdown', e => {
+  svg.setPointerCapture(e.pointerId);
+  S.down = true;
+  if (!S.running) {
+    S.running = true;
+    S.t0 = Date.now();
+  }
+  const p = pt(e);
+  act(p.x, p.y);
+});
+svg.addEventListener('pointermove', e => {
+  const p = pt(e);
+  cur.style.display = '';
+  cur.setAttribute('transform', 'translate(' + p.x + ' ' + p.y + ') rotate(-12)');
+  if (S.down) act(p.x, p.y);
+});
+svg.addEventListener('pointerup', () => S.down = false);
+svg.addEventListener('pointercancel', () => S.down = false);
+svg.addEventListener('pointerleave', () => {
+  cur.style.display = 'none';
+  S.down = false;
+});
+
+$('#tScrub').onclick = () => setTool('scrub');
+$('#tRinse').onclick = () => setTool('rinse');
+$('#soapBtn').onclick = () => {
+  S.soap = 100;
+  setTool('scrub');
+  ui();
+};
+
+const rack = $('#rack');
+function buildRack() {
+  rack.innerHTML = '';
+  DISHES.forEach((_, i) => {
+    const s = document.createElement('span');
+    if (i < S.idx) s.className = 'on';
+    rack.appendChild(s);
+  });
+}
+
+$('#rackBtn').onclick = () => {
+  if (!S.done) return;
+  S.idx++;
+  $('#rackBtn').disabled = true;
+  buildRack();
+  if (S.idx >= DISHES.length) finish();
+  else loadDish();
+};
+
+function fmt(s) {
+  return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+}
+
+function finish() {
+  S.running = false;
+  const t = (Date.now() - S.t0) / 1000;
+  const score = Math.max(0, Math.round(1000 - t * 4 - S.water * 40));
+  $('#rTime').textContent = fmt(t);
+  $('#rWater').textContent = S.water.toFixed(1) + ' L';
+  $('#rScore').textContent = score;
+  $('#rating').textContent = score >= 700 ? 'A clean line and a light touch with the tap.' : score >= 400 ? 'Everything is clean. Try less water and a faster pace.' : 'Clean dishes, heavy on time and water. Go again.';
+  $('#over').classList.add('show');
+  $('#sDish').textContent = DISHES.length + ' / ' + DISHES.length;
+  launchCelebration();
+}
+
+$('#again').onclick = () => {
+  S.idx = 0;
+  S.water = 0;
+  S.running = false;
+  S.t0 = 0;
+  $('#over').classList.remove('show');
+  $('#sTime').textContent = '0:00';
+  buildRack();
+  loadDish();
+};
+
+setInterval(() => {
+  if (S.running) $('#sTime').textContent = fmt((Date.now() - S.t0) / 1000);
+}, 250);
+
+buildRack();
+loadDish();
+
+/* ══════════════════════════════════════════
+   SCROLL REVEAL ANIMATIONS (IntersectionObserver)
+══════════════════════════════════════════ */
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.12
+};
+const scrollObserver = new IntersectionObserver((entries, obs) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      obs.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal-on-scroll').forEach(el => scrollObserver.observe(el));
+
+/* ══════════════════════════════════════════
+   MINI CELEBRATION (per-dish confetti burst)
+══════════════════════════════════════════ */
+function launchMiniCelebration() {
+  const canvas = document.getElementById('celebCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  canvas.style.display = 'block';
+  const COLORS_C = ['#0EA5E9', '#FFD700', '#FF6B6B', '#7BC67E', '#FF9F43', '#A29BFE', '#FD79A8'];
+  const pieces = [];
+  for (let i = 0; i < 80; i++) {
+    const a = (Math.random() - 0.5) * Math.PI;
+    const spd = 4 + Math.random() * 10;
+    pieces.push({
+      x: innerWidth / 2 + (Math.random() - 0.5) * 200,
+      y: innerHeight * 0.4,
+      vx: Math.cos(a) * spd,
+      vy: Math.sin(a) * spd - 6,
+      rot: Math.random() * 360,
+      rotV: (Math.random() - 0.5) * 8,
+      w: 7 + Math.random() * 10,
+      h: 4 + Math.random() * 7,
+      alpha: 1,
+      color: COLORS_C[Math.floor(Math.random() * COLORS_C.length)],
+      shape: Math.random() < 0.5 ? 'rect' : 'circle'
+    });
+  }
+  let fr = 0;
+  (function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = 0;
+    pieces.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.3;
+      p.rot += p.rotV;
+      p.alpha = Math.max(0, p.alpha - (fr > 40 ? 0.018 : 0.003));
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rot * Math.PI) / 180);
+      ctx.fillStyle = p.color;
+      if (p.shape === 'rect') ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+      if (p.alpha > 0) alive++;
+    });
+    fr++;
+    if (alive > 0) requestAnimationFrame(draw);
+    else canvas.style.display = 'none';
+  })();
+}
+
+/* ══════════════════════════════════════════
+   LOADING SCREEN & INTRO VIDEO (2s loading -> autoplay intro -> full volume audio loop & celebration)
+══════════════════════════════════════════ */
+(function(){
+  const ls = document.getElementById('loadScreen');
+  const lb = document.getElementById('loadBar');
+  const introScreen = document.getElementById('introScreen');
+  const introVid = document.getElementById('introVid');
+  const introSkip = document.getElementById('introSkip');
+  const bgAudio = document.getElementById('bgAudio');
+  const musicToggle = document.getElementById('musicToggle');
+  const musicIcon = document.getElementById('musicIcon');
+
+  function startBgAudio() {
+    if (!bgAudio) return;
+    // Increased volume to 1.0 (Maximum full volume)
+    bgAudio.volume = 1.0;
+    bgAudio.play().catch(() => {
+      // Autoplay fallback upon user interaction
+      const resumeAudio = () => {
+        bgAudio.volume = 1.0;
+        bgAudio.play();
+        window.removeEventListener('pointerdown', resumeAudio);
+      };
+      window.addEventListener('pointerdown', resumeAudio, { once: true });
+    });
+  }
+
+  if (musicToggle && bgAudio) {
+    musicToggle.addEventListener('click', () => {
+      if (bgAudio.paused) {
+        bgAudio.volume = 1.0;
+        bgAudio.play();
+        musicIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+      } else {
+        bgAudio.pause();
+        musicIcon.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+      }
+    });
+  }
+
+  let introFinished = false;
+  function finishIntro() {
+    if (introFinished) return;
+    introFinished = true;
+    introVid.pause();
+    introScreen.classList.add('fade-out');
+    setTimeout(() => {
+      introScreen.classList.remove('show');
+      introScreen.style.display = 'none';
+      startBgAudio();
+      launchCelebration();
+    }, 500);
+  }
+
+  // Auto disappear when intro video ends
+  introVid.addEventListener('ended', finishIntro);
+  introSkip.addEventListener('click', finishIntro);
+
+  // Kick loading bar
+  requestAnimationFrame(() => { lb.style.width = '100%'; });
+
+  // Exactly 2s for loading screen
+  setTimeout(() => {
+    ls.classList.add('fade-out');
+    setTimeout(() => {
+      ls.style.display = 'none';
+      introScreen.classList.add('show');
+      
+      const playPromise = introVid.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          introVid.muted = true;
+          introVid.play().catch(() => {
+            finishIntro();
+          });
+        });
+      }
+    }, 500);
+  }, 2000);
+})();
+
+/* ══════════════════════════════════════════
+   CONFETTI / CELEBRATION
+══════════════════════════════════════════ */
+function launchCelebration() {
+  const canvas = document.getElementById('celebCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.style.display = 'block';
+
+  function resize() {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const COLORS_C = ['#0EA5E9', '#FFD700', '#FF6B6B', '#7BC67E', '#FF9F43', '#A29BFE', '#FD79A8', '#00CEC9'];
+  const pieces = [];
+  const TOTAL = 180;
+
+  function rand(a, b) {
+    return a + Math.random() * (b - a);
+  }
+
+  for (let i = 0; i < TOTAL; i++) {
+    const angle = rand(-1, 0.8) * Math.PI;
+    const spd = rand(6, 20);
+    const lx = i % 2 === 0 ? rand(0, innerWidth * 0.35) : rand(innerWidth * 0.65, innerWidth);
+    pieces.push({
+      x: lx,
+      y: innerHeight + 10,
+      vx: Math.cos(angle) * spd,
+      vy: Math.sin(angle) * spd - rand(4, 10),
+      rot: rand(0, 360),
+      rotV: rand(-6, 6),
+      w: rand(8, 16),
+      h: rand(5, 10),
+      color: COLORS_C[Math.floor(Math.random() * COLORS_C.length)],
+      alpha: 1,
+      shape: Math.random() < 0.5 ? 'rect' : 'circle'
+    });
+  }
+
+  let frame = 0;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = 0;
+    pieces.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.35;
+      p.vx *= 0.995;
+      p.rot += p.rotV;
+      if (p.y > -50) p.alpha = Math.max(0, p.alpha - (frame > 80 ? 0.012 : 0.003));
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rot * Math.PI) / 180);
+      ctx.fillStyle = p.color;
+      if (p.shape === 'rect') ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      else {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+      if (p.alpha > 0) alive++;
+    });
+    frame++;
+    if (alive > 0) requestAnimationFrame(draw);
+    else {
+      canvas.style.display = 'none';
+      window.removeEventListener('resize', resize);
+    }
+  }
+  draw();
+}
+</script>
+<script src="HoloCard.js"></script>
+<script>
+/* ══════════════════════════════════════════
+   HOLO CARD POPUP LOGIC
+══════════════════════════════════════════ */
+let _holoCard = null;
+
+function showHoloPopup(isLast) {
+  const overlay = document.getElementById('holoOverlay');
+  const mount = document.getElementById('holoCardMount');
+  const subtitle = document.getElementById('holoSubtitle');
+
+  subtitle.textContent = isLast
+    ? 'All dishes done! Check your score below.'
+    : 'Place it on the rack to continue';
+
+  if (_holoCard) {
+    _holoCard.destroy();
+    mount.innerHTML = '';
+  }
+
+  _holoCard = new HoloCard({
+    image: 'popup.jpg',
+    alt: 'Spotless dish celebration',
+    preset: 'bursts',
+    intensity: 0.92,
+    scale: 1.1,
+    edgeSparkle: 0.95,
+    frame: 5,
+    glare: 0.6,
+    foilColor: '#d0eaf0',
+    width: 280,
+    radius: 16,
+    tiltMax: 18,
+    hoverScale: 1.06,
+    idle: true,
+    shadow: true
+  });
+  _holoCard.mount(mount);
+  overlay.classList.add('show');
+  launchMiniCelebration();
+}
+
+document.getElementById('holoDismiss').addEventListener('click', () => {
+  const overlay = document.getElementById('holoOverlay');
+  overlay.classList.remove('show');
+  if (S.done) {
+    S.idx++;
+    document.getElementById('rackBtn').disabled = true;
+    buildRack();
+    if (S.idx >= DISHES.length) finish();
+    else loadDish();
+  }
+});
+
+document.getElementById('holoOverlay').addEventListener('click', function(e) {
+  if (e.target === this) document.getElementById('holoDismiss').click();
+});
+</script>
+</body>
+</html>
